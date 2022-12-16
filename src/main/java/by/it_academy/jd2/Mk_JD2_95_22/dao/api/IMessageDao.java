@@ -8,5 +8,5 @@ public interface IMessageDao {
     List<MessageDTO> getMessage(String toUser);
     boolean setMessage(MessageDTO messageDTO);
 
-    int countMassage();
+    long countMassage();
 }
