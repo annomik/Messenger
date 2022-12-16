@@ -13,7 +13,7 @@ public class MessageServiceSingleton {
         if(instance == null){
             synchronized (MessageServiceSingleton.class){
                 if(instance == null){
-                    instance = new MessageService(MessageDaoSingleton.getInstance());
+                    instance = new MessageService(MessageDaoSingleton.getInstance(), UserServiceSingleton.getInstance());
                 }
             }
         } return instance;

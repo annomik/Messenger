@@ -7,5 +7,5 @@ import java.util.List;
 public interface IMessageService {
     boolean send(MessageDTO messageDTO);
     List<MessageDTO> getMessageForUser(String login);
-    long countUsers();
+    long countMassage();
 }
