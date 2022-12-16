@@ -10,3 +10,4 @@ public class StatisticAuthorizationService implements IStaticticAuthorizationSer
         return false;
     }
 }
+//

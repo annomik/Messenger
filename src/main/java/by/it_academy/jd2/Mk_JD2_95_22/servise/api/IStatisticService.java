@@ -3,3 +3,4 @@ public interface IStatisticService {
     int getCountUser();
     int getCountMassage();
 }
+//

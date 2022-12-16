@@ -1,7 +1,7 @@
 package by.it_academy.jd2.Mk_JD2_95_22.core.dto;
 
 import java.util.Objects;
-
+//
 public class MessageDTO {
     private final String fromUser;
     private final String forUser;

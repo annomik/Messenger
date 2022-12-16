@@ -3,7 +3,7 @@ package by.it_academy.jd2.Mk_JD2_95_22.core.dto;
 import by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles;
 
 import java.util.Date;
-//Надо подеметь над сохранением пароля
+//Надо подеметь над сохранением пароля/
 public class UserDTO {
     private String login;
     private String password;
