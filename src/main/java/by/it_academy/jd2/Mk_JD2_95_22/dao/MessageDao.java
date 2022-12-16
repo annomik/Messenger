@@ -24,15 +24,12 @@ public class MessageDao implements IMessageDao {
 
     @Override
     public boolean setMessage(MessageDTO messageDTO) {
-        boolean result = false;
         IUserDao userDao = new UserDao(); // возможно нужно взять из синглтона!
-        if(userDao.exist(messageDTO.getForUser())){
-            messages.add(messageDTO);
-            count++;
-            result = true;
-        }else {
+        if(!userDao.exist(messageDTO.getForUser())){
             throw new IllegalArgumentException("Такого пользователя " + messageDTO.getForUser() + " не существует");
-        }return result;
+        }
+        count++;
+        return true;
     }
 
     @Override

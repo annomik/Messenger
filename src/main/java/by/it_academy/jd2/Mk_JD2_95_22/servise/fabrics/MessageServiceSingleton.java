@@ -1,5 +1,7 @@
 package by.it_academy.jd2.Mk_JD2_95_22.servise.fabrics;
 
+
+import by.it_academy.jd2.Mk_JD2_95_22.dao.fabrics.MessageDaoSingleton;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.MessageService;
 
 public class MessageServiceSingleton {
@@ -11,7 +13,7 @@ public class MessageServiceSingleton {
         if(instance == null){
             synchronized (MessageServiceSingleton.class){
                 if(instance == null){
-                    instance = new MessageService();
+                    instance = new MessageService(MessageDaoSingleton.getInstance());
                 }
             }
         } return instance;
