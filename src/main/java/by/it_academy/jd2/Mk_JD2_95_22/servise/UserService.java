@@ -1,7 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_95_22.servise;
 
 import by.it_academy.jd2.Mk_JD2_95_22.core.dto.UserDTO;
-import by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles;
 import by.it_academy.jd2.Mk_JD2_95_22.dao.api.IUserDao;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IUserService;
 
@@ -22,14 +21,22 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean saveNewUser(UserDTO newUser) {
+    public void saveNewUser(UserDTO newUser) {
+        String login = newUser.getLogin();
 
-        return   false;
+        if (dao.exist(login)){
+            throw new IllegalArgumentException("Пользователь с таким логином уже существует");
+        }
+        this.dao.saveNewUser(newUser);
     }
 
+  // проверка логин существует, но правильно ли введен пароль
     @Override
-    public Roles authorization(String login, String password) {
-        return null;
+    public boolean authorization(String login, String password) {
+        if ( dao.exist(login) && (!password.equals(dao.exist(login)))){
+            throw new IllegalArgumentException("Неправильно введен пароль");
+        }
+        return true;
     }
 
     @Override
