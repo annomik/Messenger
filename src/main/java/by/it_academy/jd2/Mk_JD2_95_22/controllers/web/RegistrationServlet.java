@@ -1,4 +1,4 @@
-package by.it_academy.jd2.Mk_JD2_95_22.controllers;
+package by.it_academy.jd2.Mk_JD2_95_22.controller.web;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
