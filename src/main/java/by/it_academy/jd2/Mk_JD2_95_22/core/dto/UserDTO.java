@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+import static by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles.USER;
+
 //Надо подеметь над сохранением пароля/
 public class UserDTO {
     private String login;
@@ -20,7 +22,7 @@ public class UserDTO {
         this.password = password;
         this.birthday = birthday;
         setDate();
-        this.role = role;
+        this.role = USER;
     }
 
     private long setDate(){
