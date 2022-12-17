@@ -1,4 +1,4 @@
-package by.it_academy.jd2.Mk_JD2_95_22.controller.web;
+package by.it_academy.jd2.Mk_JD2_95_22.controllers.web;
 
 import by.it_academy.jd2.Mk_JD2_95_22.core.dto.ResultDTO;
 import by.it_academy.jd2.Mk_JD2_95_22.dao.MessageDao;
