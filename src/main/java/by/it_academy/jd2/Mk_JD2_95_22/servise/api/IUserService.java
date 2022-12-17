@@ -9,4 +9,3 @@ public interface IUserService {
     Roles authorization(String login, String password);
     int countUsers();
 }
-//

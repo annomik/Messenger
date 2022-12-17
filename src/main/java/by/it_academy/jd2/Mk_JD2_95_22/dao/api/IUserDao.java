@@ -7,7 +7,7 @@ public interface IUserDao {
     boolean exist(String user);
     Roles login(String user, String password);
 
-    boolean newUser(UserDTO userDTO);
+    boolean saveNewUser(UserDTO userDTO);
 
     int countUser();
 }

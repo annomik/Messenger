@@ -1,6 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_95_22.dao.fabrics;
 
-import by.it_academy.jd2.Mk_JD2_95_22.dao.MessageDao;
+
 import by.it_academy.jd2.Mk_JD2_95_22.dao.UserDao;
 
 public class UserDaoSingleton {

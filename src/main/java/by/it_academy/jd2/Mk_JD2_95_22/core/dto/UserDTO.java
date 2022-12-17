@@ -2,27 +2,39 @@ package by.it_academy.jd2.Mk_JD2_95_22.core.dto;
 
 import by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
+
 //Надо подеметь над сохранением пароля/
 public class UserDTO {
     private String login;
     private String password;
     private String birthday;
 
-    private final long timeRegistration = setTime();
+    private final long dateRegistration = setDate();
     private Roles role;
 
     public UserDTO(String login, String password, String birthday, Roles role) {
         this.login = login;
         this.password = password;
         this.birthday = birthday;
-        setTime();
+        setDate();
         this.role = role;
     }
 
-    private long setTime(){
+    private long setDate(){
         Date date = new Date();
         return date.getTime();
+    }
+
+    public String getDate(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return simpleDateFormat.format(new Date(dateRegistration));
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getLogin() {
@@ -33,11 +45,35 @@ public class UserDTO {
         return birthday;
     }
 
-    public long getTimeRegistration() {
-        return timeRegistration;
+    public long getDateRegistration() {
+        return dateRegistration;
     }
 
     public Roles getRole() {
         return role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDTO userDTO = (UserDTO) o;
+        return dateRegistration == userDTO.dateRegistration && Objects.equals(login, userDTO.login) && Objects.equals(password, userDTO.password) && Objects.equals(birthday, userDTO.birthday) && role == userDTO.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(login, password, birthday, dateRegistration, role);
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", timeRegistration=" + dateRegistration +
+                ", role=" + role +
+                '}';
     }
 }

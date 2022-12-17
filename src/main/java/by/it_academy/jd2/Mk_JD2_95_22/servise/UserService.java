@@ -2,17 +2,29 @@ package by.it_academy.jd2.Mk_JD2_95_22.servise;
 
 import by.it_academy.jd2.Mk_JD2_95_22.core.dto.UserDTO;
 import by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles;
+import by.it_academy.jd2.Mk_JD2_95_22.dao.api.IUserDao;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IUserService;
+
 public class UserService implements IUserService {
+
+    private IUserDao dao;
+
+    public UserService(IUserDao dao) {
+        this.dao = dao;
+    }
 
     @Override
     public boolean exist(String login) {
-        return false;
+        if (!dao.exist(login)){
+            throw new IllegalArgumentException("Пользователя c логином " + login + " не существует!");
+        }
+        return this.dao.exist(login);
     }
 
     @Override
     public boolean saveNewUser(UserDTO newUser) {
-        return false;
+
+        return   false;
     }
 
     @Override
@@ -22,6 +34,6 @@ public class UserService implements IUserService {
 
     @Override
     public int countUsers() {
-        return 0;
+        return this.dao.countUser();
     }
 }
