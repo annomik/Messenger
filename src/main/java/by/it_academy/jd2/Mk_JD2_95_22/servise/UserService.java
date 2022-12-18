@@ -23,7 +23,6 @@ public class UserService implements IUserService {
     @Override
     public void saveNewUser(UserDTO newUser) {
         String login = newUser.getLogin();
-
         if (dao.exist(login)){
             throw new IllegalArgumentException("Пользователь с таким логином уже существует");
         }
@@ -33,10 +32,7 @@ public class UserService implements IUserService {
   // проверка правильности введения логина и пароля
     @Override
     public boolean authorization(String login, String password) {
-        if ( !dao.exist(login) ||  !password.equals(dao.getUser(login).getPassword()) ){
-            throw new IllegalArgumentException("Неверный логин или пароль!");
-        }
-        return true;
+        return dao.authorization(login, password);
     }
 
     @Override
