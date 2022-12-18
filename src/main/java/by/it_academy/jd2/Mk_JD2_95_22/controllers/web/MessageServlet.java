@@ -3,6 +3,7 @@ package by.it_academy.jd2.Mk_JD2_95_22.controller.web;
 import by.it_academy.jd2.Mk_JD2_95_22.core.dto.MessageDTO;
 import by.it_academy.jd2.Mk_JD2_95_22.dao.fabrics.MessageDaoSingleton;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.MessageService;
+import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IMessageService;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.fabrics.UserServiceSingleton;
 
 import javax.servlet.ServletException;
@@ -23,7 +24,11 @@ public class MessageServlet extends HttpServlet {
 
     private HttpSession session;
 
-    private MessageService messageService;
+    private final IMessageService messageService;
+
+    public MessageServlet() {
+        this.messageService = new MessageService(MessageDaoSingleton.getInstance(), UserServiceSingleton.getInstance());
+    }
 
     public static String getParam(HttpServletRequest req, String param){
         String result = req.getParameter(param);
@@ -43,7 +48,6 @@ public class MessageServlet extends HttpServlet {
     public void doGet (HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
-        messageService = new MessageService(MessageDaoSingleton.getInstance(), UserServiceSingleton.getInstance());
 
         PrintWriter writer = resp.getWriter();
         session = req.getSession();
@@ -69,14 +73,16 @@ public class MessageServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
 
-        messageService = new MessageService(MessageDaoSingleton.getInstance(), UserServiceSingleton.getInstance());
-
         PrintWriter writer = resp.getWriter();
         session = req.getSession();
-        String login = (String) session.getAttribute(getParam(req, MY_LOGIN));
 
+        String login = (String) session.getAttribute(getParam(req, MY_LOGIN));
         String forUser = req.getParameter(FOR_USER);
         String messange = req.getParameter("messange");
+
+        if(forUser == null && messange == null){
+            throw new IllegalArgumentException("Одно из обязательных полей сообщения не передано от пользователя!");
+        }
 
         MessageDTO newMessage = new MessageDTO(login, forUser, messange);
 

@@ -6,7 +6,7 @@ import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IUserService;
 
 public class UserService implements IUserService {
 
-    private IUserDao dao;
+    private final IUserDao dao;
 
     public UserService(IUserDao dao) {
         this.dao = dao;
@@ -30,11 +30,11 @@ public class UserService implements IUserService {
         this.dao.saveNewUser(newUser);
     }
 
-  // проверка логин существует, но правильно ли введен пароль
+  // проверка правильности введения логина и пароля
     @Override
     public boolean authorization(String login, String password) {
-        if ( dao.exist(login) && (!password.equals(dao.exist(login)))){
-            throw new IllegalArgumentException("Неправильно введен пароль");
+        if ( !dao.exist(login) ||  !password.equals(dao.getUser(login).getPassword()) ){
+            throw new IllegalArgumentException("Неверный логин или пароль!");
         }
         return true;
     }
