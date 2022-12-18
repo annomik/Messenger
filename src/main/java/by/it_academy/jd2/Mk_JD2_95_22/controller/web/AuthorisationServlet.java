@@ -1,5 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_95_22.controller.web;
 
+import by.it_academy.jd2.Mk_JD2_95_22.core.dto.UserDTO;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IUserService;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.fabrics.UserServiceSingleton;
 
@@ -56,6 +57,7 @@ public class AuthorisationServlet extends HttpServlet {
     if (login == null || password == null ){
         throw new IllegalArgumentException("Введите логин, пароль!");
         } else if (userService.authorization(login, password)){
+
                 saveSession(req, LOGIN_PARAM_NAME, login);
                 writer.write("<p> Привет, " + login + " !</p>");
                 }

@@ -6,15 +6,12 @@ import by.it_academy.jd2.Mk_JD2_95_22.dao.api.IUserDao;
 import java.util.HashMap;
 import java.util.Map;
 import static by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles.ADMIN;
-import static by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles.USER;
-
 
 public class UserDao implements IUserDao {
 
     private Map<String, UserDTO> mapUsers = new HashMap<>();
 
-    // блок инициализации для админа
-    {
+    public UserDao() {
         UserDTO administrator = new UserDTO("admin", "admin",
                 "2000-01-02","Админ Админович", ADMIN);
         this.mapUsers.put("admin", administrator);
@@ -41,8 +38,8 @@ public class UserDao implements IUserDao {
 
 // сохраняем нового пользователя в мапу
     @Override
-    public UserDTO saveNewUser(UserDTO userDTO) {
-        return this.mapUsers.put(userDTO.getLogin(), userDTO);
+    public void saveNewUser(UserDTO userDTO) {
+       this.mapUsers.put(userDTO.getLogin(), userDTO);
     }
 
    //возвращает значение объекта по ключу login
