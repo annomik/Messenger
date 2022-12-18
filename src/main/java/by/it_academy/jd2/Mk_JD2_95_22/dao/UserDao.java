@@ -6,6 +6,7 @@ import by.it_academy.jd2.Mk_JD2_95_22.dao.api.IUserDao;
 import java.util.HashMap;
 import java.util.Map;
 import static by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles.ADMIN;
+import static by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles.USER;
 
 
 public class UserDao implements IUserDao {
@@ -15,7 +16,7 @@ public class UserDao implements IUserDao {
     // блок инициализации для админа
     {
         UserDTO administrator = new UserDTO("admin", "admin",
-                "2000-01-02", ADMIN);
+                "2000-01-02","Админ Админович", ADMIN);
         this.mapUsers.put("admin", administrator);
     }
 
@@ -24,10 +25,18 @@ public class UserDao implements IUserDao {
         return this.mapUsers.containsKey(login);
     }
 
-  // ???
+    // проверка правильности введения логина и пароля
+    @Override
+    public boolean authorization(String login, String password) {
+        if ( !this.mapUsers.containsKey(login) ||  !password.equals(mapUsers.get(login).getPassword())){
+            throw new IllegalArgumentException("Неверный логин или пароль!");
+        }
+        return true;
+    }
+
     @Override
     public Roles login(String login, String password) {
-        return null;
+        return mapUsers.get(login).getRole();
     }
 
 // сохраняем нового пользователя в мапу

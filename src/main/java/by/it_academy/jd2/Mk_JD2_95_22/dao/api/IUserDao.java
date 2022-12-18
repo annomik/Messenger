@@ -8,6 +8,6 @@ public interface IUserDao {
     Roles login(String user, String password);
     UserDTO getUser(String login);
     UserDTO saveNewUser(UserDTO userDTO);
-
+    boolean authorization(String login, String password);
     int countUser();
 }

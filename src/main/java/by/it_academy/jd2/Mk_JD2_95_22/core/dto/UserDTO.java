@@ -13,16 +13,17 @@ public class UserDTO {
     private String login;
     private String password;
     private String birthday;
-
+    private String fullName ;
     private final long dateRegistration = setDate();
     private Roles role;
 
-    public UserDTO(String login, String password, String birthday, Roles role) {
+    public UserDTO(String login, String password, String birthday, String fullName, Roles role) {
         this.login = login;
         this.password = password;
         this.birthday = birthday;
+        this.fullName = fullName;
         setDate();
-        this.role = USER;
+        this.role = role;
     }
 
     private long setDate(){
@@ -33,6 +34,10 @@ public class UserDTO {
     public String getDate(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return simpleDateFormat.format(new Date(dateRegistration));
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 
     public String getPassword() {
@@ -60,12 +65,12 @@ public class UserDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDTO userDTO = (UserDTO) o;
-        return dateRegistration == userDTO.dateRegistration && Objects.equals(login, userDTO.login) && Objects.equals(password, userDTO.password) && Objects.equals(birthday, userDTO.birthday) && role == userDTO.role;
+        return dateRegistration == userDTO.dateRegistration && Objects.equals(login, userDTO.login) && Objects.equals(password, userDTO.password) && Objects.equals(birthday, userDTO.birthday) && Objects.equals(fullName, userDTO.fullName) && role == userDTO.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(login, password, birthday, dateRegistration, role);
+        return Objects.hash(login, password, birthday, fullName, dateRegistration, role);
     }
 
     @Override
@@ -74,7 +79,8 @@ public class UserDTO {
                 "login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", birthday='" + birthday + '\'' +
-                ", timeRegistration=" + dateRegistration +
+                ", fullName='" + fullName + '\'' +
+                ", dateRegistration=" + dateRegistration +
                 ", role=" + role +
                 '}';
     }
