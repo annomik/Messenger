@@ -73,10 +73,14 @@ public class MessageServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
         session = req.getSession();
-        String login = (String) session.getAttribute(getParam(req, MY_LOGIN));
 
+        String login = (String) session.getAttribute(getParam(req, MY_LOGIN));
         String forUser = req.getParameter(FOR_USER);
         String messange = req.getParameter("messange");
+
+        if(forUser == null && messange == null){
+            throw new IllegalArgumentException("Одно из обязательных полей сообщения не передано от пользователя!");
+        }
 
         MessageDTO newMessage = new MessageDTO(login, forUser, messange);
 
