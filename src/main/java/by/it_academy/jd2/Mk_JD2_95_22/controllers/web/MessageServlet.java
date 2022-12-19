@@ -1,4 +1,4 @@
-package by.it_academy.jd2.Mk_JD2_95_22.controller.web;
+package by.it_academy.jd2.Mk_JD2_95_22.controllers.web;
 
 import by.it_academy.jd2.Mk_JD2_95_22.core.dto.MessageDTO;
 import by.it_academy.jd2.Mk_JD2_95_22.dao.fabrics.MessageDaoSingleton;
@@ -80,7 +80,7 @@ public class MessageServlet extends HttpServlet {
         String forUser = req.getParameter(FOR_USER);
         String messange = req.getParameter("messange");
 
-        if(forUser == null && messange == null){
+        if(forUser == null || messange == null){
             throw new IllegalArgumentException("Одно из обязательных полей сообщения не передано от пользователя!");
         }
 
