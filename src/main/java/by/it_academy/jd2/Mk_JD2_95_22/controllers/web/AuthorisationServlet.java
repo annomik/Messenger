@@ -1,6 +1,6 @@
 package by.it_academy.jd2.Mk_JD2_95_22.controller.web;
 
-import by.it_academy.jd2.Mk_JD2_95_22.core.dto.UserDTO;
+import by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IUserService;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.fabrics.UserServiceSingleton;
 
@@ -25,7 +25,7 @@ public class AuthorisationServlet extends HttpServlet {
         this.userService = UserServiceSingleton.getInstance();
     }
 
-    public static String getValue(HttpServletRequest req, String key){
+    public String getValue(HttpServletRequest req, String key){
         String val = req.getParameter(key);
 
         if (val == null){
@@ -40,9 +40,9 @@ public class AuthorisationServlet extends HttpServlet {
         return val;
     }
 
-    public static void saveSession(HttpServletRequest req, String key, String val){
+    public void saveSession(HttpServletRequest req, String key, Roles role){
         HttpSession session = req.getSession();
-        session.setAttribute(key, val);
+        session.setAttribute(key, role);
     }
 
     @Override
@@ -57,11 +57,13 @@ public class AuthorisationServlet extends HttpServlet {
     if (login == null || password == null ){
         throw new IllegalArgumentException("Введите логин, пароль!");
         } else if (userService.authorization(login, password)){
-
-                saveSession(req, LOGIN_PARAM_NAME, login);
-                writer.write("<p> Привет, " + login + " !</p>");
+                    if(login.equals("admin")){
+                        saveSession(req, LOGIN_PARAM_NAME, Roles.ADMIN);;
+                        } else {
+                            saveSession(req, LOGIN_PARAM_NAME, Roles.USER);
+                            }
+                    writer.write("<p> Привет, " + login + " !</p>");
                 }
-
     }
 }
 
