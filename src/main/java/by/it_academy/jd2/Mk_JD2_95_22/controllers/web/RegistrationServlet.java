@@ -65,7 +65,9 @@ public class RegistrationServlet extends HttpServlet {
         } else if (!userService.exist(login)) {
                      if(login.equals("admin")){
                           roleUser = Roles.ADMIN;
-                     } else { roleUser = Roles.USER;}
+                     } else {
+                         roleUser = Roles.USER;
+                     }
             UserDTO userDTO = new UserDTO(login, password, fullName, birthday, roleUser);
             saveSession(req, LOGIN_PARAM_NAME, userDTO);
             userService.saveNewUser(userDTO);

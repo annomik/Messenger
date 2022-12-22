@@ -29,8 +29,7 @@ public class UserDao implements IUserDao {
             throw new IllegalArgumentException("Неверный логин или пароль!");
         }
         if (login == "admin"){ return ADMIN;}
-        else
-            return Roles.USER;
+        else  return Roles.USER;
     }
 
     @Override

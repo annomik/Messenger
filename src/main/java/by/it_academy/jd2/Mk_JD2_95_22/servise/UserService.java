@@ -32,7 +32,7 @@ public class UserService implements IUserService {
 
   // проверка правильности введения логина и пароля
     @Override
-    public Roles authorization(String login, String password) {
+    public Roles authorization(String login, String password){
         return dao.authorization(login, password);
     }
 

@@ -57,6 +57,7 @@ public class AuthorisationServlet extends HttpServlet {
     String login = getValue(req, LOGIN_PARAM_NAME);
     String password = getValue(req, PASSWORD_PARAM_NAME);
     Roles roleUser = userService.authorization(login,password);
+
     if (login == null || password == null ){
         throw new IllegalArgumentException("Введите логин, пароль!");
         } else  if(roleUser.name().equals(Roles.NOT_LOGIN)) {
