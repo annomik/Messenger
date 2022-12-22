@@ -1,4 +1,4 @@
-package by.it_academy.jd2.Mk_JD2_95_22.controller.web;
+package by.it_academy.jd2.Mk_JD2_95_22.controllers.web;
 
 import by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IUserService;
@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "RegistrationServlet", urlPatterns = "/api/login")
+import static by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles.ADMIN;
+
+@WebServlet(name = "AuthorisationServlet", urlPatterns = "/api/login")
 public class AuthorisationServlet extends HttpServlet {
 
     private final String LOGIN_PARAM_NAME = "login";
@@ -40,9 +42,9 @@ public class AuthorisationServlet extends HttpServlet {
         return val;
     }
 
-    public void saveSession(HttpServletRequest req, String key, Roles role){
+    public void saveSession(HttpServletRequest req, String key, String val){
         HttpSession session = req.getSession();
-        session.setAttribute(key, role);
+        session.setAttribute(key, val);
     }
 
     @Override
@@ -58,9 +60,11 @@ public class AuthorisationServlet extends HttpServlet {
         throw new IllegalArgumentException("Введите логин, пароль!");
         } else if (userService.authorization(login, password)){
                     if(login.equals("admin")){
-                        saveSession(req, LOGIN_PARAM_NAME, Roles.ADMIN);;
+                        saveSession(req, LOGIN_PARAM_NAME, login);
+                        saveSession(req, "user", "admin");
                         } else {
-                            saveSession(req, LOGIN_PARAM_NAME, Roles.USER);
+                            saveSession(req, LOGIN_PARAM_NAME,  login);
+                            saveSession(req, "user", "user");
                             }
                     writer.write("<p> Привет, " + login + " !</p>");
                 }
