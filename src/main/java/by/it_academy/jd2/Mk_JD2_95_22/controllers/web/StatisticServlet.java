@@ -1,12 +1,10 @@
 package by.it_academy.jd2.Mk_JD2_95_22.controllers.web;
 
 import by.it_academy.jd2.Mk_JD2_95_22.core.dto.ResultDTO;
-import by.it_academy.jd2.Mk_JD2_95_22.core.dto.UserDTO;
-import by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles;
-import by.it_academy.jd2.Mk_JD2_95_22.servise.StatisticAuthorizationService;
-import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IListener;
-import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IStaticticAuthorizationService;
+import by.it_academy.jd2.Mk_JD2_95_22.servise.StatisticService;
+import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IStatisticService;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.fabrics.ListenerServiceSingletone;
+import by.it_academy.jd2.Mk_JD2_95_22.servise.fabrics.MessageServiceSingleton;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.fabrics.StatisticSingleton;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.fabrics.UserServiceSingleton;
 
@@ -18,16 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Locale;
 
 @WebServlet(name = "StatisticServlet", urlPatterns = "api/admin/statistics")
 public class StatisticServlet extends HttpServlet {
-    IStaticticAuthorizationService service;
+    IStatisticService service;
 
-    public StatisticServlet(IStaticticAuthorizationService service) {
-        this.service = new StatisticAuthorizationService(
-                StatisticSingleton.getInstance(),
+    public StatisticServlet(StatisticService service) {
+        this.service = new StatisticService(
                 UserServiceSingleton.getInstance(),
+                MessageServiceSingleton.getInstance(),
                 ListenerServiceSingletone.getInstance()
         );
     }
@@ -43,7 +40,7 @@ public class StatisticServlet extends HttpServlet {
             throw new IllegalArgumentException("Вы вошли не под администратором!!!");
         }
 
-        ResultDTO resultDTO = service.login(login);
+        ResultDTO resultDTO = service.getResult(login);
         if(resultDTO==null){
             throw new NullPointerException("Сообщении и пользователей не существует");
         }

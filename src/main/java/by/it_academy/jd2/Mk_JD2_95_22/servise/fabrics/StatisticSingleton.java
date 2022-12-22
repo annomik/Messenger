@@ -14,7 +14,8 @@ public class StatisticSingleton {
                 if(instance==null){
                     instance = new StatisticService(
                             UserServiceSingleton.getInstance(),
-                            MessageServiceSingleton.getInstance()
+                            MessageServiceSingleton.getInstance(),
+                            ListenerServiceSingletone.getInstance()
                     );
                 }
             }
