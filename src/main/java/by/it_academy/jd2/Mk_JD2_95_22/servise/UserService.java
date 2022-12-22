@@ -1,6 +1,7 @@
 package by.it_academy.jd2.Mk_JD2_95_22.servise;
 
 import by.it_academy.jd2.Mk_JD2_95_22.core.dto.UserDTO;
+import by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles;
 import by.it_academy.jd2.Mk_JD2_95_22.dao.api.IUserDao;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IUserService;
 
@@ -31,7 +32,7 @@ public class UserService implements IUserService {
 
   // проверка правильности введения логина и пароля
     @Override
-    public boolean authorization(String login, String password) {
+    public Roles authorization(String login, String password) {
         return dao.authorization(login, password);
     }
 

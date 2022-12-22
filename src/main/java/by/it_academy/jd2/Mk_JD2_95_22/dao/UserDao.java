@@ -24,11 +24,13 @@ public class UserDao implements IUserDao {
 
     // проверка правильности введения логина и пароля
     @Override
-    public boolean authorization(String login, String password) {
+    public Roles authorization(String login, String password) {
         if ( !this.mapUsers.containsKey(login) ||  !password.equals(mapUsers.get(login).getPassword())){
             throw new IllegalArgumentException("Неверный логин или пароль!");
         }
-        return true;
+        if (login == "admin"){ return ADMIN;}
+        else
+            return Roles.USER;
     }
 
     @Override

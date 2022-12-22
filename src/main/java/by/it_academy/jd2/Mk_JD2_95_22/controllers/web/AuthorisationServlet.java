@@ -42,7 +42,7 @@ public class AuthorisationServlet extends HttpServlet {
         return val;
     }
 
-    public void saveSession(HttpServletRequest req, String key, String val){
+    private void saveSession(HttpServletRequest req, String key, Object val){
         HttpSession session = req.getSession();
         session.setAttribute(key, val);
     }
@@ -56,19 +56,21 @@ public class AuthorisationServlet extends HttpServlet {
 
     String login = getValue(req, LOGIN_PARAM_NAME);
     String password = getValue(req, PASSWORD_PARAM_NAME);
+    Roles roleUser = userService.authorization(login,password);
     if (login == null || password == null ){
         throw new IllegalArgumentException("Введите логин, пароль!");
-        } else if (userService.authorization(login, password)){
-                    if(login.equals("admin")){
-                        saveSession(req, LOGIN_PARAM_NAME, login);
-                        saveSession(req, "user", "admin");
-                        } else {
-                            saveSession(req, LOGIN_PARAM_NAME,  login);
-                            saveSession(req, "user", "user");
-                            }
-                    writer.write("<p> Привет, " + login + " !</p>");
-                }
+        } else  if(roleUser.name().equals(Roles.NOT_LOGIN)) {
+                    throw new IllegalArgumentException("Не верный логин или пароль!");
+                    }else if(login.equals("admin")){
+                                saveSession(req, "login", login);
+                                saveSession(req, "role", roleUser);
+                           } else {
+                                saveSession(req, "login",  login);
+                                saveSession(req, "user", "user");
+                                }
+    writer.write("<p> Привет, " + login + " !</p>");
     }
+
 }
 
 

@@ -1,4 +1,4 @@
-package by.it_academy.jd2.Mk_JD2_95_22.controller.web;
+package by.it_academy.jd2.Mk_JD2_95_22.controllers.web;
 
 import by.it_academy.jd2.Mk_JD2_95_22.core.dto.UserDTO;
 import by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles;
@@ -28,7 +28,7 @@ public class RegistrationServlet extends HttpServlet {
         this.userService =  UserServiceSingleton.getInstance();
     }
 
-    public static String getValue(HttpServletRequest req, String key){
+    public String getValue(HttpServletRequest req, String key){
         String val = req.getParameter(key);
 
         if (val == null){
@@ -43,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
         return val;
     }
 
-    public static void saveSession(HttpServletRequest req, String key,  UserDTO userDTO){
+    private void saveSession(HttpServletRequest req, String key, UserDTO userDTO){
         HttpSession session = req.getSession();
         session.setAttribute(key, userDTO);
     }
@@ -58,11 +58,15 @@ public class RegistrationServlet extends HttpServlet {
         String password = getValue(req, PASSWORD_PARAM_NAME);
         String fullName = getValue(req, FULLNAME_PARAM);
         String birthday = getValue(req, BIRTHDAY_PARAM);
+        Roles roleUser;
 
         if (login == null || password == null || fullName == null || birthday == null) {
             throw new IllegalArgumentException("Все поля должны быть заполнены!");
         } else if (!userService.exist(login)) {
-            UserDTO userDTO = new UserDTO(login, password, fullName, birthday, Roles.USER);
+                     if(login.equals("admin")){
+                          roleUser = Roles.ADMIN;
+                     } else { roleUser = Roles.USER;}
+            UserDTO userDTO = new UserDTO(login, password, fullName, birthday, roleUser);
             saveSession(req, LOGIN_PARAM_NAME, userDTO);
             userService.saveNewUser(userDTO);
             writer.write("<p> Вы успешно зарегистрированы !</p>");
