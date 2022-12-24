@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ListenerService implements IListener {
-    private Map<String,String> sessions;
+    private volatile Map<String,String> sessions;
 
     public ListenerService(Map<String, String> sessions) {
         this.sessions = sessions;

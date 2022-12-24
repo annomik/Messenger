@@ -6,5 +6,5 @@
     <display-name>Messanger</display-name>
     <listener>
         <listener-class>by.it_academy.jd2.Mk_JD2_95_22.controllers.listeners.SessionListener</listener-class>
-    </listener>>
+    </listener>
 </web-app>

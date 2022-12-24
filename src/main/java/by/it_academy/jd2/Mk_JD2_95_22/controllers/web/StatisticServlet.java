@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Writer;
 
-@WebServlet(name = "StatisticServlet", urlPatterns = "api/admin/statistics")
+@WebServlet(name = "StatisticServlet", urlPatterns = "/api/admin/statistics")
 public class StatisticServlet extends HttpServlet {
     IStatisticService service;
 
