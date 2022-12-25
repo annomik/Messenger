@@ -21,7 +21,7 @@ import java.io.Writer;
 public class StatisticServlet extends HttpServlet {
     IStatisticService service;
 
-    public StatisticServlet(StatisticService service) {
+    public StatisticServlet() {
         this.service = new StatisticService(
                 UserServiceSingleton.getInstance(),
                 MessageServiceSingleton.getInstance(),
