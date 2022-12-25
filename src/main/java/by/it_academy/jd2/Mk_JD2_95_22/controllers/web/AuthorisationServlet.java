@@ -21,11 +21,11 @@ public class AuthorisationServlet extends HttpServlet {
 
     private final IUserService userService;
 
-    public AuthorisationServlet(IUserService userService) {
+    public AuthorisationServlet() {
         this.userService = UserServiceSingleton.getInstance();
     }
 
-    public String getValue(HttpServletRequest req, String key){
+    public static String getValue(HttpServletRequest req, String key){
         String val = req.getParameter(key);
 
         if (val == null){
@@ -46,7 +46,6 @@ public class AuthorisationServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
 
     PrintWriter writer = resp.getWriter();
-
     HttpSession session = req.getSession();
 
     String login = getValue(req, LOGIN_PARAM_NAME);

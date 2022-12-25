@@ -24,11 +24,11 @@ public class RegistrationServlet extends HttpServlet {
 
     private final IUserService userService;
 
-    public RegistrationServlet(IUserService userService) {
+    public RegistrationServlet() {
         this.userService =  UserServiceSingleton.getInstance();
     }
 
-    public String getValue(HttpServletRequest req, String key){
+    public static String getValue(HttpServletRequest req, String key){
         String val = req.getParameter(key);
 
         if (val == null){
@@ -49,6 +49,7 @@ public class RegistrationServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
 
         PrintWriter writer = resp.getWriter();
+
         String login = getValue(req, LOGIN_PARAM_NAME);
         String loginLowerCase = login.toLowerCase().trim();
         String password = getValue(req, PASSWORD_PARAM_NAME);
