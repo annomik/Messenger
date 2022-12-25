@@ -46,6 +46,7 @@ public class AuthorisationServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
 
     PrintWriter writer = resp.getWriter();
+
     HttpSession session = req.getSession();
 
     String login = getValue(req, LOGIN_PARAM_NAME);
