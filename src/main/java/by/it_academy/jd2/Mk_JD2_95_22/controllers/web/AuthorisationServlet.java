@@ -61,7 +61,7 @@ public class AuthorisationServlet extends HttpServlet {
                            session.setAttribute("user", trimLogin);
                            session.setAttribute("role", roleUser);
                            }
-    writer.write("<p> Привет, " + trimLogin + " !</p>");
+    writer.write("<p> Привет, " + trimLogin + "!</p>");
     }
 }
 
