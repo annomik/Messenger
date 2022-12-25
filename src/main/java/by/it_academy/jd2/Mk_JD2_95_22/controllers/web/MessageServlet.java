@@ -78,7 +78,7 @@ public class MessageServlet extends HttpServlet {
 
         String login = (String) session.getAttribute(getParam(req, MY_LOGIN));
         String forUser = req.getParameter(FOR_USER);
-        String messange = req.getParameter("messange");
+        String messange = req.getParameter("massange");
 
         if(forUser == null || messange == null){
             throw new IllegalArgumentException("Одно из обязательных полей сообщения не передано от пользователя!");
