@@ -49,6 +49,7 @@ public class RegistrationServlet extends HttpServlet {
         resp.setContentType("text/html; charset=UTF-8");
 
         PrintWriter writer = resp.getWriter();
+
         String login = getValue(req, LOGIN_PARAM_NAME);
         String loginLowerCase = login.toLowerCase().trim();
         String password = getValue(req, PASSWORD_PARAM_NAME);
