@@ -49,19 +49,19 @@ public class AuthorisationServlet extends HttpServlet {
     HttpSession session = req.getSession();
 
     String login = getValue(req, LOGIN_PARAM_NAME);
-    String loginLowerCase = login.toLowerCase().trim();
+    String trimLogin = login.trim();
     String password = getValue(req, PASSWORD_PARAM_NAME);
-    Roles roleUser = userService.authorization(loginLowerCase,password);
+    Roles roleUser = userService.authorization(trimLogin,password);
 
-    if (loginLowerCase == null || password == null ){
+    if (trimLogin == null || password == null ){
         throw new IllegalArgumentException("Введите логин, пароль!");
         } else  if(roleUser.name().equals(Roles.NOT_LOGIN)) {
                     throw new IllegalArgumentException("Неверный логин или пароль!");
                     }else {
-                           session.setAttribute("user", loginLowerCase);
+                           session.setAttribute("user", trimLogin);
                            session.setAttribute("role", roleUser);
                            }
-    writer.write("<p> Привет, " + loginLowerCase + " !</p>");
+    writer.write("<p> Привет, " + trimLogin + " !</p>");
     }
 }
 

@@ -51,25 +51,25 @@ public class RegistrationServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
 
         String login = getValue(req, LOGIN_PARAM_NAME);
-        String loginLowerCase = login.toLowerCase().trim();
+        String trimLogin = login.trim();
         String password = getValue(req, PASSWORD_PARAM_NAME);
         String fullName = getValue(req, FULLNAME_PARAM);
         String birthday = getValue(req, BIRTHDAY_PARAM);
         Roles roleUser;
         HttpSession session = req.getSession();
 
-        if (loginLowerCase == null || password == null || fullName == null || birthday == null) {
+        if (trimLogin == null || password == null || fullName == null || birthday == null) {
             throw new IllegalArgumentException("Все поля должны быть заполнены!");
             }
-        if(loginLowerCase.equals("admin")){
+        if(login.equals("admin")){
             roleUser = Roles.ADMIN;
         } else {
             roleUser = Roles.USER;
             }
-            UserDTO userDTO = new UserDTO(loginLowerCase, password, fullName, birthday, roleUser);
+            UserDTO userDTO = new UserDTO(trimLogin, password, fullName, birthday, roleUser);
             userService.saveNewUser(userDTO);
-            session.setAttribute( "login", loginLowerCase);
+            session.setAttribute( "user", trimLogin);
             session.setAttribute( "role", roleUser);
-            writer.write("<p> Вы успешно зарегистрированы !</p>");
+            writer.write("<p>"+ trimLogin+ ", Вы успешно зарегистрированы !</p>");
     }
 }

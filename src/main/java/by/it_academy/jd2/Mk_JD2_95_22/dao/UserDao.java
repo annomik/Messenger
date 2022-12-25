@@ -13,7 +13,7 @@ public class UserDao implements IUserDao {
 
     public UserDao() {
         UserDTO administrator = new UserDTO("admin", "admin",
-                "2000-01-02","Админ Админович", ADMIN);
+                "Админ Админович","2000-01-02", ADMIN);
         this.mapUsers.put("admin", administrator);
     }
 
