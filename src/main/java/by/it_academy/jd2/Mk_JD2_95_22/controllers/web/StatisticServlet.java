@@ -32,7 +32,7 @@ public class StatisticServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession httpSession = req.getSession();
-        String login = httpSession.getAttribute("login").toString();
+        String login = httpSession.getAttribute("user").toString();
         if(login==null||login.isBlank()){
             throw new IllegalArgumentException("Логин не введен!!!");
         }
