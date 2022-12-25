@@ -24,11 +24,11 @@ public class RegistrationServlet extends HttpServlet {
 
     private final IUserService userService;
 
-    public RegistrationServlet(IUserService userService) {
+    public RegistrationServlet() {
         this.userService =  UserServiceSingleton.getInstance();
     }
 
-    public String getValue(HttpServletRequest req, String key){
+    public static String getValue(HttpServletRequest req, String key){
         String val = req.getParameter(key);
 
         if (val == null){
