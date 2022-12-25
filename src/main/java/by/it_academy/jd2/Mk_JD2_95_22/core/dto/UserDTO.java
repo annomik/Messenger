@@ -17,11 +17,12 @@ public class UserDTO {
     private final long dateRegistration = setDate();
     private Roles role;
 
-    public UserDTO(String login, String password, String birthday, String fullName, Roles role) {
+    public UserDTO(String login, String password,  String fullName, String birthday,Roles role) {
         this.login = login;
         this.password = password;
-        this.birthday = birthday;
         this.fullName = fullName;
+        this.birthday = birthday;
+        this.birthday = birthday;
         setDate();
         this.role = role;
     }

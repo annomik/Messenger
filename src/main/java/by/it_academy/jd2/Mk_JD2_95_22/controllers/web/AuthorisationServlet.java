@@ -13,8 +13,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static by.it_academy.jd2.Mk_JD2_95_22.core.enums.Roles.ADMIN;
-
 @WebServlet(name = "AuthorisationServlet", urlPatterns = "/api/login")
 public class AuthorisationServlet extends HttpServlet {
 
@@ -42,11 +40,6 @@ public class AuthorisationServlet extends HttpServlet {
         return val;
     }
 
-    private void saveSession(HttpServletRequest req, String key, Object val){
-        HttpSession session = req.getSession();
-        session.setAttribute(key, val);
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -54,24 +47,23 @@ public class AuthorisationServlet extends HttpServlet {
 
     PrintWriter writer = resp.getWriter();
 
-    String login = getValue(req, LOGIN_PARAM_NAME);
-    String password = getValue(req, PASSWORD_PARAM_NAME);
-    Roles roleUser = userService.authorization(login,password);
+    HttpSession session = req.getSession();
 
-    if (login == null || password == null ){
+    String login = getValue(req, LOGIN_PARAM_NAME);
+    String loginLowerCase = login.toLowerCase().trim();
+    String password = getValue(req, PASSWORD_PARAM_NAME);
+    Roles roleUser = userService.authorization(loginLowerCase,password);
+
+    if (loginLowerCase == null || password == null ){
         throw new IllegalArgumentException("Введите логин, пароль!");
         } else  if(roleUser.name().equals(Roles.NOT_LOGIN)) {
-                    throw new IllegalArgumentException("Не верный логин или пароль!");
-                    }else if(login.equals("admin")){
-                                saveSession(req, "login", login);
-                                saveSession(req, "role", roleUser);
-                           } else {
-                                saveSession(req, "login",  login);
-                                saveSession(req, "user", "user");
-                                }
-    writer.write("<p> Привет, " + login + " !</p>");
+                    throw new IllegalArgumentException("Неверный логин или пароль!");
+                    }else {
+                           session.setAttribute("user", loginLowerCase);
+                           session.setAttribute("role", roleUser);
+                           }
+    writer.write("<p> Привет, " + loginLowerCase + " !</p>");
     }
-
 }
 
 

@@ -43,11 +43,6 @@ public class RegistrationServlet extends HttpServlet {
         return val;
     }
 
-    private void saveSession(HttpServletRequest req, String key, UserDTO userDTO){
-        HttpSession session = req.getSession();
-        session.setAttribute(key, userDTO);
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -55,24 +50,25 @@ public class RegistrationServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
         String login = getValue(req, LOGIN_PARAM_NAME);
+        String loginLowerCase = login.toLowerCase().trim();
         String password = getValue(req, PASSWORD_PARAM_NAME);
         String fullName = getValue(req, FULLNAME_PARAM);
         String birthday = getValue(req, BIRTHDAY_PARAM);
         Roles roleUser;
+        HttpSession session = req.getSession();
 
-        if (login == null || password == null || fullName == null || birthday == null) {
+        if (loginLowerCase == null || password == null || fullName == null || birthday == null) {
             throw new IllegalArgumentException("Все поля должны быть заполнены!");
-        } else if (!userService.exist(login)) {
-                     if(login.equals("admin")){
-                          roleUser = Roles.ADMIN;
-                     } else {
-                         roleUser = Roles.USER;
-                     }
-            UserDTO userDTO = new UserDTO(login, password, fullName, birthday, roleUser);
-            saveSession(req, LOGIN_PARAM_NAME, userDTO);
+            }
+        if(loginLowerCase.equals("admin")){
+            roleUser = Roles.ADMIN;
+        } else {
+            roleUser = Roles.USER;
+            }
+            UserDTO userDTO = new UserDTO(loginLowerCase, password, fullName, birthday, roleUser);
             userService.saveNewUser(userDTO);
+            session.setAttribute( "login", loginLowerCase);
+            session.setAttribute( "role", roleUser);
             writer.write("<p> Вы успешно зарегистрированы !</p>");
-        }
-
     }
 }
