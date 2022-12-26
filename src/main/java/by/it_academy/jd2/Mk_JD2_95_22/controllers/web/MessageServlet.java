@@ -5,7 +5,6 @@ import by.it_academy.jd2.Mk_JD2_95_22.dao.fabrics.MessageDaoSingleton;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.MessageService;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.api.IMessageService;
 import by.it_academy.jd2.Mk_JD2_95_22.servise.fabrics.UserServiceSingleton;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +17,8 @@ import java.util.List;
 
 @WebServlet(name = "MessageServlet", urlPatterns = "/api/message")
 public class MessageServlet extends HttpServlet {
-    private static final String MY_LOGIN = "login";
+    private static final String MY_LOGIN = "user";
     private static final String FOR_USER = "forUser";
-    private static final String PASSWORD = "password";
 
     private HttpSession session;
 
@@ -51,7 +49,8 @@ public class MessageServlet extends HttpServlet {
 
         PrintWriter writer = resp.getWriter();
         session = req.getSession();
-        String login = (String) session.getAttribute(getParam(req, MY_LOGIN));
+
+        String login = getParam(req, MY_LOGIN);
 
         List<MessageDTO> myMessanges = messageService.getMessageForUser(login);
 
@@ -76,9 +75,10 @@ public class MessageServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         session = req.getSession();
 
-        String login = (String) session.getAttribute(getParam(req, MY_LOGIN));
+        String login = getParam(req, MY_LOGIN);
+
         String forUser = req.getParameter(FOR_USER);
-        String messange = req.getParameter("massange");
+        String messange = req.getParameter("message");
 
         if(forUser == null || messange == null){
             throw new IllegalArgumentException("Одно из обязательных полей сообщения не передано от пользователя!");
