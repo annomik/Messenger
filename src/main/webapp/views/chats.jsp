@@ -25,7 +25,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Messager</title>
+        <title>Chats</title>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
 
@@ -33,7 +33,7 @@
 
         <div>
             <div>
-                <div class="w3-container w3-blue-grey w3-opacity w3-left-align">
+                <div class="w3-container w3-green w3-left-align">
                     <h2>Chats</h2>
                 </div>
                 <%
@@ -59,7 +59,7 @@
                                 for (MessageDTO myMessange : myMessanges) {
                                     out.println("<p>><span style='color: red;'>" +
                                             "Сообщение от пользователя:" + myMessange.getFromUser()
-                                            + " дата сообщения: " + myMessange.getDate() +  "!</span></p>");
+                                            + " дата сообщения: " + myMessange.getDate() +  "</span></p>");
 
                                     out.println("<li class=\"w3-hover-sand\">" + myMessange.getMessage() + "</li>");
                                 }
