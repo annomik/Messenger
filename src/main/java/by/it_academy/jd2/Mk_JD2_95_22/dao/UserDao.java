@@ -28,7 +28,7 @@ public class UserDao implements IUserDao {
         if (!this.mapUsers.containsKey(login) || !password.equals(mapUsers.get(login).getPassword())){
             throw new IllegalArgumentException("Неверный логин или пароль!");
         }
-        if (login == "admin"){ return ADMIN;}
+        if (mapUsers.get(login).getLogin().equals("admin")){ return Roles.ADMIN;}
         else  return Roles.USER;
     }
 

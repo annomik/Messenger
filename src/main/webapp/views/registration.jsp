@@ -37,29 +37,34 @@
 
         <div class="w3-container w3-padding">
             <%
-                if (request.getAttribute("login") != null) {
+                if (request.getAttribute("user") != null) {
                     out.println("<div class=\"w3-panel w3-green w3-display-container w3-card-4 w3-round\">\n" +
                             "   <span onclick=\"this.parentElement.style.display='none'\"\n" +
                             "   class=\"w3-button w3-margin-right w3-display-right w3-round-large w3-hover-green w3-border w3-border-green w3-hover-border-grey\">×</span>\n" +
-                            "   <h5>User '" + request.getAttribute("userName") + "' added!</h5>\n" +
+                            "   <h5>User '" + request.getAttribute("user") + "' added!</h5>\n" +
                             "</div>");
                 }
             %>
             <div class="w3-card-4">
                 <div class="w3-container w3-center w3-green">
-                    <h2>Form message</h2>
+                    <h2>Form registration</h2>
                 </div>
-                <form method="post" action="/api/message" class="w3-selection w3-light-grey w3-padding">
-                    <label>For user:
-                        <input type="text" name="forUser" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"><br />
+                <form method="post" action ="${pageContext.request.contextPath}/api/user" class="w3-selection w3-light-grey w3-padding">
+                    <label>Your login:
+                        <input type="text" name="login" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"><br />
                     </label>
-                    <label>Message content:
-                        <input type="text" name="message" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"><br />
+                    <label>Your password:
+                       <input type="password" name="password" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"><br />
                     </label>
-                    <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Send</button>
+                    <label>Your full name:
+                       <input type="text" name="fullName" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"><br />
+                    </label>
+                    <label>Your birthday:
+                        <input type="text" name="birthday" class="w3-input w3-animate-input w3-border w3-round-large" style="width: 30%"><br />
+                    </label>
+                    <button type="submit" class="w3-btn w3-green w3-round-large w3-margin-bottom">Send form</button>
                 </form>
             </div>
         </div>
-
     </body>
 </html>

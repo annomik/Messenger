@@ -28,12 +28,12 @@ public class AdminFilter implements Filter{
                 filterChain.doFilter(servletRequest,servletResponse);
                 isOK = true;
             }
-            String admin = (String) session.getAttribute("user");
-
-            if(admin.equals("admin")){
-                filterChain.doFilter(servletRequest,servletResponse);
-                isOK = true;
-            }
+//            String admin = (String) session.getAttribute("user");
+//
+//            if(admin.equals("admin")){
+//                filterChain.doFilter(servletRequest,servletResponse);
+//                isOK = true;
+//            }
         }
         if(!isOK){
             throw new IllegalArgumentException("Don't admin");
