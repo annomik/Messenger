@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Writer;
 
-@WebServlet(name = "StatisticServlet", urlPatterns = "/ui/admin/statistics")
+@WebServlet(name = "StatisticServletUi", urlPatterns = "/ui/admin/statistics")
 public class StatisticServletUi extends HttpServlet {
     IStatisticService service;
 
@@ -39,7 +39,7 @@ public class StatisticServletUi extends HttpServlet {
             throw new IllegalArgumentException("Вы вошли не под администратором!!!");
         }
 
-        ResultDTO resultDTO = new ResultDTO(1,1,1);
+        ResultDTO resultDTO = service.getResult(login);
         if(resultDTO==null){
             throw new NullPointerException("Сообщении и пользователей не существует");
         }
