@@ -16,7 +16,5 @@
                      <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='/messanger-1.0.0/ui/login'">  Authorisation  </button>
                  </div>
          </div>
-
     </body>
-
 </html>
