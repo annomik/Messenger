@@ -12,8 +12,8 @@
 
          <div class="w3-container w3-center">
                   <div class="w3-bar w3-padding-large w3-padding-24">
-                     <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='/messanger-1.0.0/ui/reg'">  Registration  </button>
-                     <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='/messanger-1.0.0/ui/login'">  Authorisation  </button>
+                     <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='${pageContext.request.contextPath}/ui/reg'">  Registration  </button>
+                     <button class="w3-btn w3-hover-green w3-round-large" onclick="location.href='${pageContext.request.contextPath}/ui/login'">  Authorisation  </button>
                  </div>
          </div>
     </body>
